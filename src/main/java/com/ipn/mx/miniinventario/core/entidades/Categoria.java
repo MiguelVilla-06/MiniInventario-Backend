@@ -16,7 +16,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "Categoria")
+@Table(name = "categoria")
 public class Categoria implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
