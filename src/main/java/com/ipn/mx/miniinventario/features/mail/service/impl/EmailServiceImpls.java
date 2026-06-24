@@ -14,8 +14,6 @@ public class EmailServiceImpls implements EmailService {
 
     @Autowired
     private JavaMailSender mailSender;
-
-    // Carga la imagen desde la carpeta src/main/resources/static/img/
     @Value("classpath:static/img/imagen.png")
     private Resource resourceFile;
 
@@ -27,7 +25,7 @@ public class EmailServiceImpls implements EmailService {
             // El parámetro 'true' indica que es un mensaje multipart (lleva adjuntos)
             MimeMessageHelper helper = new MimeMessageHelper(mensaje, true, "UTF-8");
 
-            // CORREGIDO: Usamos el resource directamente para evitar errores de rutas/JARs
+            // Usamos el resource directamente para evitar errores de rutas/JARs
             helper.addAttachment("super.", resourceFile);
 
             helper.setFrom("miguel.villanova15@gmail.com", "Envio de correos via Spring"); // Usa tu correo real de properties
