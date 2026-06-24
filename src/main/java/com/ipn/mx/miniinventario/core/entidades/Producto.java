@@ -16,31 +16,38 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "producto")
 public class Producto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (nullable = false)
+    @Column(name = "id_producto", nullable = false)
     private Long idProducto;
 
     @Size(min = 4, max = 50)
-    @Column ( nullable = false, length = 50)
+    @Column(name = "nombreproducto", nullable = false, length = 50)
     private String nombreProducto;
 
-    @Column (nullable = false, length = 100)
+    @Column(name = "descripcionproducto", nullable = false, length = 100)
     private String descripcionProducto;
 
-    @Column (nullable = false,  scale = 2)
+    @Column(name = "precioproducto", nullable = false, scale = 2)
     private double precioProducto;
 
-    @Column (nullable = false)
+    @Column(name = "existencia", nullable = false)
     private int existencia;
 
-    @Temporal(TemporalType.DATE)
-    @Column (nullable = true, name="create_at")
+    @Column(name = "createat", nullable = true) //
     private LocalDate createAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idCategoria", nullable = false)
+    @JoinColumn(name = "id_categoria", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnoreProperties({"productos", "hibernateLazyInitializer", "handler"})
-    private Categoria idCategoria;
+    private Categoria categoria;
+
+    @PrePersist
+    public void prePersist() {
+        this.createAt = LocalDate.now();
+    }
 }

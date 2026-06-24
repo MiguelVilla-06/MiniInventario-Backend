@@ -1,8 +1,6 @@
 package com.ipn.mx.miniinventario.core.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -18,22 +16,30 @@ import java.util.Set;
 @Entity
 @Table(name = "categoria")
 public class Categoria implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column ( nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_categoria", nullable = false)
     private Long idCategoria;
 
     @Size(min = 4, max = 50)
-    @Column ( nullable = false, length = 50)
+    @Column(name = "nombrecategoria", nullable = false, length = 50)
     private String nombreCategoria;
 
-    @Column (nullable = false, length = 100)
+    @Column(name = "descripcioncategoria", nullable = false, length = 100)
     private String descripcionCategoria;
 
-    @Column (name = "create_at", nullable = true) //Solo se usa name si el atributo se llama diferente a la tabla
+    @Column(name = "createat", nullable = true)
     private LocalDate createAt;
 
-    @OneToMany(mappedBy = "idCategoria", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Producto> productos = new HashSet<Producto>();
+
+    @PrePersist
+    public void prePersist() {
+        this.createAt = LocalDate.now();
+    }
 }
