@@ -1,8 +1,12 @@
-FROM maven:3.8.5-openjdk-17 AS build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
+
+FROM openjdk:25-ea-jdk-slim AS base
+
+FROM maven:3.9.9-amazoncorretto-25 AS builder
 COPY . .
 RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:17-jdk-alpine
-COPY --from=build /target/*.jar app.jar
+FROM amazoncorretto:25-alpine
+COPY --from=builder /target/*.jar app.jar
 EXPOSE 8084
 ENTRYPOINT ["java", "-jar", "app.jar"]
