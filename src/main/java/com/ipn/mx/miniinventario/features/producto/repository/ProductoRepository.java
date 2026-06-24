@@ -8,8 +8,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
+
     @Transactional
     @Modifying
-    @Query("DELETE FROM Producto p WHERE p.categoria.idCategoria = :idCategoria")
+    @Query(value = "DELETE FROM producto WHERE id_categoria = :idCategoria", nativeQuery = true)
     void eliminarProductosPorCategoriaId(@Param("idCategoria") Long idCategoria);
 }
