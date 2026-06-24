@@ -10,19 +10,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MiniInventarioApplication implements CommandLineRunner {
-
     @Autowired
     private CategoriaDAO dao;
     @Autowired
     private EmailService emailService;
-
     public static void main(String[] args) {
         SpringApplication.run(MiniInventarioApplication.class, args);
     }
-
     @Override
     public void run(String... args) throws Exception {
-
         System.out.println("Categoria");
         Categoria categoria = new Categoria();
         System.out.println("====== PROCESANDO ENVÍO DE NOTIFICACIÓN DE ARRANQUE ======");
@@ -36,10 +32,8 @@ public class MiniInventarioApplication implements CommandLineRunner {
                 <small style='color: gray;'>Este es un correo automatizado generado por el sistema.</small>
                 """;
             emailService.enviarCorreo(destino, asunto, cuerpoHtml);
-
             System.out.println("====== NOTIFICACIÓN ENVIADA EXITOSAMENTE ======");
-        } catch (Exception e) {
-            System.err.println("No se pudo despachar el correo de inicio: " + e.getMessage());
+        } catch (Exception e) {System.err.println("No se pudo despachar el correo de inicio: " + e.getMessage());
         }
     }
 }
