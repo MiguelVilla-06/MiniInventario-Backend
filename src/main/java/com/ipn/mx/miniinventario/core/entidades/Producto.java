@@ -43,7 +43,7 @@ public class Producto implements Serializable {
     private LocalDate createAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_categoria", nullable = false)
+    @JoinColumn(name = "idcategoria", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnoreProperties({"productos", "hibernateLazyInitializer", "handler"})
     private Categoria categoria;
