@@ -1,9 +1,9 @@
-FROM maven:3.9.6-eclipse-temurin-21 AS builder
+FROM ghcr.io/graalvm/graalvm-community:25 AS build
+
 COPY . .
 
-RUN mvn clean package -DskipTests
+RUN ./mvnw clean package -DskipTests
 
-FROM amazoncorretto:25-alpine
-COPY --from=builder /target/*.jar app.jar
 EXPOSE 8084
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+ENTRYPOINT ["java", "-jar", "target/MiniInventario-0.0.1-SNAPSHOT.jar"]
