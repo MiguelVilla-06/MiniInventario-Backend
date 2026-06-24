@@ -43,7 +43,7 @@ public class ProductoController {
             p.setExistencia(producto.getExistencia());
             p.setPrecioProducto(producto.getPrecioProducto());
             p.setCreateAt(producto.getCreateAt());
-            p.setIdCategoria(producto.getIdCategoria());
+            p.setCategoria(producto.getCategoria());
             return productoService.save(p);
         }
         else
