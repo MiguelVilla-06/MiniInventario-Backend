@@ -19,25 +19,25 @@ public class CategoriaController {
     @Autowired
     private EmailService emailService;
 
-    @GetMapping("/categoria")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Categoria> findAll(){
         return categoriaService.findAll();
     }
 
-    @GetMapping("/categoria/{id}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Categoria findOne(@PathVariable Long id){
         return categoriaService.findById(id);
     }
 
-    @PostMapping("/categoria")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Categoria create(@RequestBody Categoria categoria){
         return categoriaService.save(categoria);
     }
 
-    @PutMapping("/categoria/{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public Categoria update(@RequestBody Categoria categoria, @PathVariable Long id){
         Categoria c = categoriaService.findById(id);
@@ -47,10 +47,11 @@ public class CategoriaController {
         return categoriaService.save(c);
     }
 
-    @DeleteMapping("/categoria/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id){
         categoriaService.deleteById(id);
     }
 
 }
+
