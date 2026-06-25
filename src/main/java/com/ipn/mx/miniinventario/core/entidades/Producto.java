@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -41,10 +43,11 @@ public class Producto implements Serializable {
 
     @Column(name = "createat", nullable = true)
     private LocalDate createAt;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idcategoria", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotFound(action = NotFoundAction.IGNORE)
     @JsonIgnoreProperties({"productos", "hibernateLazyInitializer", "handler"})
     private Categoria categoria;
 
