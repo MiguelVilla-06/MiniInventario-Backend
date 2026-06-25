@@ -39,10 +39,10 @@ public class Producto implements Serializable {
     @Column(name = "existencia", nullable = false)
     private int existencia;
 
-    @Column(name = "createat", nullable = true) //
+    @Column(name = "createat", nullable = true)
     private LocalDate createAt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idcategoria", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnoreProperties({"productos", "hibernateLazyInitializer", "handler"})
